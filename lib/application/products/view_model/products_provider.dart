@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 class ProductProvider extends ChangeNotifier {
   List<ProductModel> products = [];
-  bool _isLoading = false;
-  String? _errorMessage;
+  bool isLoading = false;
+  String? errorMessage;
   final productService = ProductService();
 
   ProductProvider() {
@@ -13,14 +13,15 @@ class ProductProvider extends ChangeNotifier {
   }
 
   Future<void> loadProducts() async {
-    _isLoading = true;
+    isLoading = true;
+    errorMessage = null;
     notifyListeners();
     try {
       products = await productService.fetchproducts();
     } catch (e) {
-      _errorMessage = e.toString();
+      errorMessage = e.toString();
     } finally {
-      _isLoading = false;
+      isLoading = false;
       notifyListeners();
     }
   }
