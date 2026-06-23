@@ -2,6 +2,7 @@ class ProductModel {
   int? id;
   String? title;
   String? slug;
+  int? price;
   String? description;
   Category? category;
   List<String>? images;
@@ -12,6 +13,7 @@ class ProductModel {
     required this.id,
     required this.title,
     required this.slug,
+    required this.price,
     required this.description,
     required this.category,
     required this.images,
@@ -23,9 +25,13 @@ class ProductModel {
       id: Json['id'],
       title: Json['title'],
       slug: Json['slug'],
+      price: Json['price'],
       description: Json['description'],
       category: Category.fromJson(Json['category']),
-      images: List<String>.from(Json['images']),
+
+      // images: List<String>.from(Json['images']),
+      images: Json['images'] != null ? List<String>.from(Json['images']) : [],
+
       creationAt: Json['creationAt'],
       updatedAt: Json['updatedAt'],
     );
