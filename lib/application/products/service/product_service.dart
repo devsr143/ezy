@@ -8,7 +8,7 @@ class ProductService {
 
   Future<List<ProductModel>> fetchproducts() async {
     final response = await http.get(Uri.parse("$baseUrl/products"));
-    if (response.statusCode == 200) {
+    if (response.statusCode != 200) {
       throw Exception('Failed to load products');
     }
     final List data = jsonDecode(response.body);
